@@ -1,4 +1,4 @@
-SELECT 
+select
     _FILE,
 	_LINE,
 	_MODIFIED AS _MODIFIED_TS,
