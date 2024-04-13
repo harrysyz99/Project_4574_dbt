@@ -4,7 +4,7 @@ SELECT
 	_MODIFIED AS _MODIFIED_TS,
 	_FIVETRAN_SYNCED AS _FIVETRAN_SYNCED_TS,
 	EMPLOYEE_ID,
-	REPLACE(hire_date, 'day ', '') as hire_date,
+	CAST(REPLACE(hire_date, 'day ', '') AS DATE) as hire_date,
 	NAME,
 	CITY,
 	ADDRESS,
