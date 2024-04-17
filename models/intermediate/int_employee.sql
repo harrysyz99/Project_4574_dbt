@@ -1,12 +1,13 @@
 select 
 joint.EMPLOYEE_ID,
-HIRE_DATE,
 NAME,
-CITY,
-ADDRESS,
+HIRE_DATE,
+QUIT_DATE,
 TITLE,
 ANNUAL_SALARY,
-QUIT_DATE
+CITY,
+ADDRESS
+
 from {{ref('base_google_drive_HR_JOIN')}} as joint
-join {{ref('base_goolge_drive_HR_QUITS')}} as quit
+full join {{ref('base_goolge_drive_HR_QUITS')}} as quit
 on quit.EMPLOYEE_ID = joint.EMPLOYEE_ID
