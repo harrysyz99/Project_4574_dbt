@@ -1,6 +1,11 @@
-select items.session_id
+select 
+    items.SESSION_ID,
+    orders.ORDER_ID,
+    items.ITEM_VIEW_AT_TS,
+    items.REMOVE_FROM_CART_QUANTITY,
+    items.ADD_TO_CART_QUANTITY
+    
 from {{ ref("base_snowflake_ITEM_VIEWS") }} as items
 full join
-    {{ ref("base_snowflake_ORDERS") }} as orders on items.session_id = orders.session_id
-full join
-    {{ ref("base_snowflake_PAGE_VIEWS") }} as page on page.session_id = items.session_id
+    {{ ref("base_snowflake_ORDERS") }} as orders on items.SESSION_ID = orders.SESSION_ID
+
