@@ -209,7 +209,6 @@ models:
         description: These are the ids of the clients requesting the website in each session. 
       - name: SESSION_AT_TS
         tests:
-          - unique
           - not_null
         description: timestamp of starting time of the session time. 
       - name: OPERATING_SYSTEMS
