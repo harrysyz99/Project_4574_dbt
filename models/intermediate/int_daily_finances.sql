@@ -1,17 +1,26 @@
--- Assuming you use SQL Server
-WITH DateSeries AS (
-    SELECT CAST('2024-01-01' AS DATE) AS DateValue
-    UNION ALL
-    SELECT DATEADD(day, 1, DateValue)
-    FROM DateSeries
-    WHERE DateValue < '2024-04-30'
+WITH AllDates AS (
+    SELECT CAST(ORDER_DATE AS DATE) AS REPORT_DATE
+    FROM {{ ref("int_fact_order") }}
+    UNION
+    SELECT CAST(RETURNED_AT AS DATE)
+    FROM {{ ref("int_fact_order") }}
+    UNION
+    SELECT CAST(DATE_TIME AS DATE)
+    FROM {{ ref("base_google_drive_EXPENSES") }}
 ),
 OrderSummary AS (
     SELECT 
-        CAST(ORDER_AT_TS AS DATE) AS ORDER_DATE,
+        ORDER_DATE,
         SUM(INCOME) AS TOTAL_ORDER_INCOME
     FROM {{ ref("int_fact_order") }}
-    GROUP BY CAST(ORDER_AT_TS AS DATE)
+    GROUP BY ORDER_DATE
+),
+RefundSummary AS (
+    SELECT 
+        CAST(RETURNED_AT AS DATE) AS REFUND_DATE,
+        SUM(RETURN_AMOUNT) AS TOTAL_REFUNDED
+    FROM {{ ref("int_fact_order") }}
+    GROUP BY CAST(RETURNED_AT AS DATE)
 ),
 ExpenseSummary AS (
     SELECT 
@@ -20,14 +29,15 @@ ExpenseSummary AS (
     FROM {{ ref("base_google_drive_EXPENSES") }}
     GROUP BY CAST(DATE_TIME AS DATE)
 )
-
 SELECT 
-    CAST(ds.DateValue as DATE) AS ORDER_DATE,
+    ad.REPORT_DATE,
     COALESCE(os.TOTAL_ORDER_INCOME, 0) AS TOTAL_ORDER_INCOME,
+    COALESCE(rs.TOTAL_REFUNDED, 0) AS TOTAL_REFUNDED,
     COALESCE(es.TOTAL_EXPENSES, 0) AS TOTAL_EXPENSES,
-    COALESCE(os.TOTAL_ORDER_INCOME, 0) - COALESCE(es.TOTAL_EXPENSES, 0) AS NET_INCOME
-FROM DateSeries ds
-full JOIN OrderSummary os ON os.ORDER_DATE = ds.DateValue
-full JOIN ExpenseSummary es ON es.EXPENSE_DATE = ds.DateValue
--- OPTION (MAXRECURSION 366) -- This allows the recursion to generate dates for a year
-ORDER BY ds.DateValue
+    (COALESCE(os.TOTAL_ORDER_INCOME, 0) - COALESCE(es.TOTAL_EXPENSES, 0) - COALESCE(rs.TOTAL_REFUNDED, 0)) AS NET_INCOME
+FROM AllDates ad
+LEFT JOIN OrderSummary os ON os.ORDER_DATE = ad.REPORT_DATE
+LEFT JOIN RefundSummary rs ON rs.REFUND_DATE = ad.REPORT_DATE
+LEFT JOIN ExpenseSummary es ON es.EXPENSE_DATE = ad.REPORT_DATE
+where ad.REPORT_DATE = '2024-01-01'
+ORDER BY ad.REPORT_DATE
