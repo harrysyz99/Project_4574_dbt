@@ -215,3 +215,39 @@ models:
         tests:
           - not_null
         description: This is the operation system of each order. If there are multiple orders, record the lastest one. 
+ - name: daily_finance
+    description: Summarizing daily revenue and expenses
+    columns:
+  - name: REPORT_DATE
+    description: The date the report was generated.
+    tests:
+      - unique
+      - not_null
+  - name: RETURNED_AT
+    description: The date an order was returned.
+  - name: DATE_TIME
+    description: Timestamp of the event or transaction.
+  - name: ORDER_DATE
+    description: The date an order was placed.
+  - name: TOTAL_ORDER_INCOME
+    description: Total income from orders.
+  - name: TOTAL_SHIPPING_COST
+    description: Total shipping costs associated with orders.
+  - name: REFUND_DATE
+    description: The date a refund was issued.
+  - name: TOTAL_REFUNDED
+    description: Total amount refunded.
+  - name: EXPENSE_DATE
+    description: The date expenses were recorded.
+  - name: TOTAL_EXPENSES
+    description: Total expenses incurred.
+  - name: WAREHOUSE_EXPENSE
+    description: Expenses related to warehouse operations.
+  - name: HR_EXPENSE
+    description: Human resources related expenses.
+  - name: TECH_TOOL_EXPENSE
+    description: Expenses on technical tools and software.
+  - name: OTHER_EXPENSE
+    description: Other miscellaneous expenses.
+  - name: NET_INCOME
+    description: Net income calculated as total income minus total expenses and refunds.
