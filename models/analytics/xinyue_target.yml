@@ -1,0 +1,46 @@
+version: 2
+
+models:
+  - name: dim_client
+    description: The client dimenion table. This includes all clients that ever placed a request
+    columns:
+      - name: client_id
+        description: The unique id assigned to each client
+        tests:
+          - unique
+          - not_null
+      - name: name
+        description: The encrypted name of a client
+      - name: address
+        description: The encrypted address of a client
+      - name: city
+        description: The city where a client live
+      - name: phone
+        description: The encrypted phone number of a client
+
+  - name: dim_pet
+    description: The pet dimenion table. One row for each pet.
+    columns:
+      - name: pet_id
+        tests:
+          - unique
+          - not_null
+        description: The unique identifier of a pet
+      - name: pet_name 
+        description: The name of the pet
+      - name: client_id
+        description: This is the id of the owner. Can be used to join it with dim_client
+
+  - name: fact_walk
+    description: Fact table for all walks. past walks, future walks, canceled walks.
+    columns:
+      - name: request_ts
+        description: timestamp of when the client placed a request
+      - name: client_id
+        description: This is the id of the client requesting the walk
+      - name: pet_id
+        description: This is the id of the pet
+      - name: start_walk_ts
+        description: timestamp of starting time of the walk
+      - name: walk_minutes
+        description: duration of the walk in minutes

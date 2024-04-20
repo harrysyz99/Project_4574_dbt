@@ -1,0 +1,51 @@
+models:
+  - name: fact_order
+    description: The order dimension table. This includes all orders that ever been placed
+    columns:
+      - name: order_id
+        description: The unique id assigned to each order
+        tests:
+          - unique
+          - not_null
+      - name: session_ids
+        description: session ids corresponding to a certain order
+        tests:
+          - not_null
+      - name: order_date
+        description: date of a order is placed
+        tests:
+          - not_null
+      - name: shipping_cost
+        description: shipping cost corresponding to a certain order
+        tests:
+          - not_null
+      - name: tax_rate
+        description: tax rate corresponding to a certain order
+        tests:
+          - not_null
+      - name: payment_method
+        description: Order payment methods used by customers
+        tests:
+          - not_null
+      - name: state
+        description: State where the order is placed
+        tests:
+          - not_null
+      - name: returned_at
+        description: return date of an order
+        tests:
+          - not_null
+      - name: is_refunded
+        description: whether the order is refunded
+        tests:
+          - not_null
+      - name: income
+        description: revenue corresponding to a certain order
+        tests:
+          - not_null
+      - name: return_amount
+        description: If a return is requested, the amount returned
+        tests:
+          - not_null
+
+   
