@@ -1,6 +1,7 @@
 version: 2
 
 models:
+
   - name: dim_client
     description: The client dimenion table. This includes all clients that ever placed a request
     columns:
@@ -82,3 +83,136 @@ models:
         description: The amount of specific item left in the cart
         tests:
           - not_null
+  - name: fact_order
+    description: The order dimension table. This includes all orders that ever been placed
+    columns:
+      - name: order_id
+        description: The unique id assigned to each order
+        tests:
+          - unique
+          - not_null
+      - name: session_ids
+        description: session ids corresponding to a certain order
+        tests:
+          - not_null
+      - name: order_date
+        description: date of a order is placed
+        tests:
+          - not_null
+      - name: shipping_cost
+        description: shipping cost corresponding to a certain order
+        tests:
+          - not_null
+      - name: tax_rate
+        description: tax rate corresponding to a certain order
+        tests:
+          - not_null
+      - name: payment_method
+        description: Order payment methods used by customers
+        tests:
+          - not_null
+      - name: state
+        description: State where the order is placed
+        tests:
+          - not_null
+      - name: returned_at
+        description: return date of an order
+        tests:
+          - not_null
+      - name: is_refunded
+        description: whether the order is refunded
+        tests:
+          - not_null
+      - name: income
+        description: revenue corresponding to a certain order
+        tests:
+          - not_null
+      - name: return_amount
+        description: If a return is requested, the amount returned
+        tests:
+          - not_null
+  - name: dim_employee
+    description: The employee dimenion table. This includes all employees who work here
+    columns:
+      - name: EMPLOYEE_ID
+        description: The unique id assigned to each employee
+        tests:
+          - unique
+          - not_null
+      - name: NAME
+        description: The encrypted name of a employee
+        tests:
+          - not_null
+      - name: HIRE_DATE
+        description: The day that the employee was hired
+        tests:
+          - not_null
+      - name: QUIT_DATE
+        description: The day that the employee quitted
+        tests:
+          - not_null
+      - name: TITLE
+        description: The title of a employee
+        tests:
+          - not_null
+      - name: ANNUAL_SALARY
+        tests:
+         - not_null
+        description: The annual salary of a employee
+      - name: CITY
+        description: The city where a employee live
+        tests:
+          - not_null
+      - name: ADDRESS
+        description: The encrypted most recent address of a employee
+        tests:
+          - not_null
+  - name: fact_session
+    description: Fact table for all sessions. past sessions, future sessions. One row for each session. 
+    columns:
+      - name: session_id
+        tests:
+          - unique
+          - not_null
+        description: This is the id of the session requesting the website.
+      - name: item_names
+        tests:
+          - not_null
+        description: These are the names of items viewed in each session. 
+      - name: DISTINCT_ITEMS_COUNT
+        tests:
+          - not_null
+        description: This counts the distinct number of items that are viewed.
+      - name: TOTAL_CART_QUANTITY
+        tests:
+          - not_null
+        description: This counts the number of items in the cart at the end of each session.    
+      - name: PAGE_NAMES
+        tests:
+          - not_null
+        description: These are the names of pages viewed in each session.
+      - name: ORDER_AT_TS
+        tests:
+          - not_null
+        description: timestamp of the order time. If there are multiple orders, record the lastest one. 
+      - name: ORDER_STATES
+        tests:
+          - not_null
+        description: This is the state of the order address. If there are multiple orders, record the lastest one. 
+      - name: ORDER_PLACED
+        tests:
+          - not_null
+        description: This is whether a client makes an order in each session.      
+      - name: CLIENT_IDS
+        tests:
+          - not_null
+        description: These are the ids of the clients requesting the website in each session. 
+      - name: SESSION_AT_TS
+        tests:
+          - unique
+          - not_null
+        description: timestamp of starting time of the session time. 
+      - name: OPERATING_SYSTEMS
+        tests:
+          - not_null
+        description: This is the operation system of each order. If there are multiple orders, record the lastest one. 
