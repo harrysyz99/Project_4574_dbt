@@ -1,13 +1,3 @@
--- SELECT
---     _FILE,
---     _LINE,
---     _MODIFIED AS _MODIFIED_TS,
---     _FIVETRAN_SYNCED AS _FIVETRAN_SYNCED_TS,
---     RETURNED_AT,
---     ORDER_ID,
---     CAST(IS_REFUNDED AS BOOLEAN) AS IS_REFUNDED
--- FROM {{ source('google_drive', 'RETURNS') }}
-
 WITH RankedReturns AS (
     SELECT
         _FILE,
@@ -30,3 +20,13 @@ SELECT
     IS_REFUNDED
 FROM RankedReturns
 WHERE rn = 1 
+
+-- SELECT
+--     _FILE,
+--     _LINE,
+--     _MODIFIED AS _MODIFIED_TS,
+--     _FIVETRAN_SYNCED AS _FIVETRAN_SYNCED_TS,
+--     RETURNED_AT,
+--     ORDER_ID,
+--     CAST(IS_REFUNDED AS BOOLEAN) AS IS_REFUNDED
+-- FROM {{ source('google_drive', 'RETURNS') }}
