@@ -4,7 +4,7 @@ WITH DateSeries AS (
     UNION ALL
     SELECT DATEADD(day, 1, DateValue)
     FROM DateSeries
-    WHERE DateValue < '2024-5-31'
+    WHERE DateValue < '2024-04-30'
 ),
 OrderSummary AS (
     SELECT 
