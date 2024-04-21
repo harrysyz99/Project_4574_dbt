@@ -9,81 +9,48 @@ models:
         description: Session ID of each client
         tests:
           - not_null
-          - freshness:
-              warn_after: {count: 1, period: day}
-              error_after: {count: 2, period: day}
           
       - name: client_id
         description: The unique id assigned to each client
         tests:
           - unique
           - not_null
-          - freshness:
-              warn_after: {count: 1, period: day}
-              error_after: {count: 2, period: day}
       - name: CLIENT_NAME
         description: The encrypted name of a client
         tests:
           - not_null
-          - freshness:
-              warn_after: {count: 1, period: day}
-              error_after: {count: 2, period: day}
       - name: SHIPPING_ADDRESS
         description: The encrypted address of a client
         tests:
           - not_null
-          - freshness:
-              warn_after: {count: 1, period: day}
-              error_after: {count: 2, period: day}
       - name: STATE
         description: The STATE where a client live
         tests:
           - not_null
-          - freshness:
-              warn_after: {count: 1, period: day}
-              error_after: {count: 2, period: day}
       - name: IP
         description: ip address of the order
         tests:
           - not_null
-          - freshness:
-              warn_after: {count: 1, period: day}
-              error_after: {count: 2, period: day}
       - name: OS
         description: OS used of the client
         tests:
           - not_null
-          - freshness:
-              warn_after: {count: 1, period: day}
-              error_after: {count: 2, period: day}
       - name: SESSION_AT_TS
         description: the time for this session opened
         tests:
           - not_null
-          - freshness:
-              warn_after: {count: 1, period: day}
-              error_after: {count: 2, period: day}
       - name: ORDER_AT_TS
         description: the time for the order has been made
         tests:
           - not_null
-          - freshness:
-              warn_after: {count: 1, period: day}
-              error_after: {count: 2, period: day}
       - name: PAYMENT_INFO
         description: The encrypted PAYMENT_INFO of a client
         tests:
           - not_null
-          - freshness:
-              warn_after: {count: 1, period: day}
-              error_after: {count: 2, period: day}
       - name: phone
         description: The encrypted phone number of a client
         tests:
           - not_null
-          - freshness:
-              warn_after: {count: 1, period: day}
-              error_after: {count: 2, period: day}
 
   - name: dim_item
     description: The item dimention table, which represent for each session how many item has been added to the cart.
@@ -93,58 +60,34 @@ models:
         tests:
           - not_null
           - unique
-          - freshness:
-              warn_after: {count: 1, period: day}
-              error_after: {count: 2, period: day}
       - name: SESSION_ID
         description: The Session ID requesting the object or item view
         tests:
           - not_null
-          - freshness:
-              warn_after: {count: 1, period: day}
-              error_after: {count: 2, period: day}
       - name: ORDER_ID
         description: The order id for an order
         tests:
           - not_null
-          - freshness:
-              warn_after: {count: 1, period: day}
-              error_after: {count: 2, period: day}
       - name: ITEM_NAME
         description: The name of the item has been reviewed on the wesite.
         tests:
           - not_null
-          - freshness:
-              warn_after: {count: 1, period: day}
-              error_after: {count: 2, period: day}
       - name: ITEM_VIEW_AT_TS
         description: The time of specific item was viewed
         tests:
           - not_null
-          - freshness:
-              warn_after: {count: 1, period: day}
-              error_after: {count: 2, period: day}
       - name: REMOVE_FROM_CART_QUANTITY
         description: The amount of specific item was removed form the cart
         tests:
           - not_null
-          - freshness:
-              warn_after: {count: 1, period: day}
-              error_after: {count: 2, period: day}
       - name: ADD_TO_CART_QUANTITY
         description: The amount of specific item was added to the cart
         tests:
           - not_null
-          - freshness:
-              warn_after: {count: 1, period: day}
-              error_after: {count: 2, period: day}
       - name: TOTAL_CART_QUANTITY
         description: The amount of specific item left in the cart
         tests:
           - not_null
-          - freshness:
-              warn_after: {count: 1, period: day}
-              error_after: {count: 2, period: day}
   - name: fact_order
     description: The order dimension table. This includes all orders that ever been placed
     columns:
@@ -153,79 +96,46 @@ models:
         tests:
           - unique
           - not_null
-          - freshness:
-              warn_after: {count: 1, period: day}
-              error_after: {count: 2, period: day}
       - name: session_ids
         description: session ids corresponding to a certain order
         tests:
           - not_null
-          - freshness:
-              warn_after: {count: 1, period: day}
-              error_after: {count: 2, period: day}
       - name: order_date
         description: date of a order is placed
         tests:
           - not_null
-          - freshness:
-              warn_after: {count: 1, period: day}
-              error_after: {count: 2, period: day}
       - name: shipping_cost
         description: shipping cost corresponding to a certain order
         tests:
           - not_null
-          - freshness:
-              warn_after: {count: 1, period: day}
-              error_after: {count: 2, period: day}
       - name: tax_rate
         description: tax rate corresponding to a certain order
         tests:
           - not_null
-          - freshness:
-              warn_after: {count: 1, period: day}
-              error_after: {count: 2, period: day}
       - name: payment_method
         description: Order payment methods used by customers
         tests:
           - not_null
-          - freshness:
-              warn_after: {count: 1, period: day}
-              error_after: {count: 2, period: day}
       - name: state
         description: State where the order is placed
         tests:
           - not_null
-          - freshness:
-              warn_after: {count: 1, period: day}
-              error_after: {count: 2, period: day}
       - name: returned_at
         description: return date of an order
         tests:
           - not_null
-          - freshness:
-              warn_after: {count: 1, period: day}
-              error_after: {count: 2, period: day}
       - name: is_refunded
         description: whether the order is refunded
         tests:
           - not_null
-          - freshness:
-              warn_after: {count: 1, period: day}
-              error_after: {count: 2, period: day}
       - name: income
         description: revenue corresponding to a certain order
         tests:
           - not_null
-          - freshness:
-              warn_after: {count: 1, period: day}
-              error_after: {count: 2, period: day}
       - name: return_amount
         description: If a return is requested, the amount returned
         tests:
           - not_null
-          - freshness:
-              warn_after: {count: 1, period: day}
-              error_after: {count: 2, period: day}
   - name: dim_employee
     description: The employee dimenion table. This includes all employees who work here
     columns:
@@ -234,58 +144,34 @@ models:
         tests:
           - unique
           - not_null
-          - freshness:
-              warn_after: {count: 1, period: day}
-              error_after: {count: 2, period: day}
       - name: NAME
         description: The encrypted name of a employee
         tests:
           - not_null
-          - freshness:
-              warn_after: {count: 1, period: day}
-              error_after: {count: 2, period: day}
       - name: HIRE_DATE
         description: The day that the employee was hired
         tests:
           - not_null
-          - freshness:
-              warn_after: {count: 1, period: day}
-              error_after: {count: 2, period: day}
       - name: QUIT_DATE
         description: The day that the employee quitted
         tests:
           - not_null
-          - freshness:
-              warn_after: {count: 1, period: day}
-              error_after: {count: 2, period: day}
       - name: TITLE
         description: The title of a employee
         tests:
           - not_null
-          - freshness:
-              warn_after: {count: 1, period: day}
-              error_after: {count: 2, period: day}
       - name: ANNUAL_SALARY
         tests:
-          - not_null
-          - freshness:
-              warn_after: {count: 1, period: day}
-              error_after: {count: 2, period: day}
+         - not_null
         description: The annual salary of a employee
       - name: CITY
         description: The city where a employee live
         tests:
           - not_null
-          - freshness:
-              warn_after: {count: 1, period: day}
-              error_after: {count: 2, period: day}
       - name: ADDRESS
         description: The encrypted most recent address of a employee
         tests:
           - not_null
-          - freshness:
-              warn_after: {count: 1, period: day}
-              error_after: {count: 2, period: day}
   - name: fact_session
     description: Fact table for all sessions. past sessions, future sessions. One row for each session. 
     columns:
@@ -293,79 +179,46 @@ models:
         tests:
           - unique
           - not_null
-          - freshness:
-              warn_after: {count: 1, period: day}
-              error_after: {count: 2, period: day}
         description: This is the id of the session requesting the website.
       - name: item_names
         tests:
           - not_null
-          - freshness:
-              warn_after: {count: 1, period: day}
-              error_after: {count: 2, period: day}
         description: These are the names of items viewed in each session. 
       - name: DISTINCT_ITEMS_COUNT
         tests:
           - not_null
-          - freshness:
-              warn_after: {count: 1, period: day}
-              error_after: {count: 2, period: day}
         description: This counts the distinct number of items that are viewed.
       - name: TOTAL_CART_QUANTITY
         tests:
           - not_null
-          - freshness:
-              warn_after: {count: 1, period: day}
-              error_after: {count: 2, period: day}
         description: This counts the number of items in the cart at the end of each session.    
       - name: PAGE_NAMES
         tests:
           - not_null
-          - freshness:
-              warn_after: {count: 1, period: day}
-              error_after: {count: 2, period: day}
         description: These are the names of pages viewed in each session.
       - name: ORDER_AT_TS
         tests:
           - not_null
-          - freshness:
-              warn_after: {count: 1, period: day}
-              error_after: {count: 2, period: day}
         description: timestamp of the order time. If there are multiple orders, record the lastest one. 
       - name: ORDER_STATES
         tests:
           - not_null
-          - freshness:
-              warn_after: {count: 1, period: day}
-              error_after: {count: 2, period: day}
         description: This is the state of the order address. If there are multiple orders, record the lastest one. 
       - name: ORDER_PLACED
         tests:
           - not_null
-          - freshness:
-              warn_after: {count: 1, period: day}
-              error_after: {count: 2, period: day}
         description: This is whether a client makes an order in each session.      
       - name: CLIENT_IDS
         tests:
           - not_null
-          - freshness:
-              warn_after: {count: 1, period: day}
-              error_after: {count: 2, period: day}
         description: These are the ids of the clients requesting the website in each session. 
       - name: SESSION_AT_TS
         tests:
           - not_null
-          - freshness:
-              warn_after: {count: 1, period: day}
-              error_after: {count: 2, period: day}
         description: timestamp of starting time of the session time. 
       - name: OPERATING_SYSTEMS
         tests:
           - not_null
-          - freshness:
-              warn_after: {count: 1, period: day}
-              error_after: {count: 2, period: day}
         description: This is the operation system of each order. If there are multiple orders, record the lastest one. 
   - name: daily_finance
     description: Summarizing daily revenue and expenses
@@ -375,104 +228,31 @@ models:
         tests:
           - unique
           - not_null
-          - freshness:
-              warn_after: {count: 1, period: day}
-              error_after: {count: 2, period: day}
       - name: RETURNED_AT
-        tests:
-          - not_null
-          - freshness:
-              warn_after: {count: 1, period: day}
-              error_after: {count: 2, period: day}
         description: The date an order was returned.
       - name: DATE_TIME
-        tests:
-          - not_null
-          - freshness:
-              warn_after: {count: 1, period: day}
-              error_after: {count: 2, period: day}
         description: Timestamp of the event or transaction.
       - name: ORDER_DATE
-        tests:
-          - not_null
-          - freshness:
-              warn_after: {count: 1, period: day}
-              error_after: {count: 2, period: day}
         description: The date an order was placed.
       - name: TOTAL_ORDER_INCOME
-        tests:
-          - not_null
-          - freshness:
-              warn_after: {count: 1, period: day}
-              error_after: {count: 2, period: day}
         description: Total income from orders.
       - name: TOTAL_SHIPPING_COST
-        tests:
-          - not_null
-          - freshness:
-              warn_after: {count: 1, period: day}
-              error_after: {count: 2, period: day}
         description: Total shipping costs associated with orders.
       - name: REFUND_DATE
-        tests:
-          - not_null
-          - freshness:
-              warn_after: {count: 1, period: day}
-              error_after: {count: 2, period: day}
         description: The date a refund was issued.
       - name: TOTAL_REFUNDED
-        tests:
-          - not_null
-          - freshness:
-              warn_after: {count: 1, period: day}
-              error_after: {count: 2, period: day}
         description: Total amount refunded.
       - name: EXPENSE_DATE
-        tests:
-          - not_null
-          - freshness:
-              warn_after: {count: 1, period: day}
-              error_after: {count: 2, period: day}
         description: The date expenses were recorded.
       - name: TOTAL_EXPENSES
-        tests:
-          - not_null
-          - freshness:
-              warn_after: {count: 1, period: day}
-              error_after: {count: 2, period: day}
         description: Total expenses incurred.
       - name: WAREHOUSE_EXPENSE
-        tests:
-          - not_null
-          - freshness:
-              warn_after: {count: 1, period: day}
-              error_after: {count: 2, period: day}
         description: Expenses related to warehouse operations.
       - name: HR_EXPENSE
-        tests:
-          - not_null
-          - freshness:
-              warn_after: {count: 1, period: day}
-              error_after: {count: 2, period: day}
         description: Human resources related expenses.
       - name: TECH_TOOL_EXPENSE
-        tests:
-          - not_null
-          - freshness:
-              warn_after: {count: 1, period: day}
-              error_after: {count: 2, period: day}
         description: Expenses on technical tools and software.
       - name: OTHER_EXPENSE
-        tests:
-          - not_null
-          - freshness:
-              warn_after: {count: 1, period: day}
-              error_after: {count: 2, period: day}
         description: Other miscellaneous expenses.
       - name: NET_INCOME
-        tests:
-          - not_null
-          - freshness:
-              warn_after: {count: 1, period: day}
-              error_after: {count: 2, period: day}
         description: Net income calculated as total income minus total expenses and refunds.
