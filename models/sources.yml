@@ -7,19 +7,19 @@ sources:
     tables:
       - name: EXPENSES
         freshness:
-          warn_after: {count: 1, period: day}
+          warn_after: {count: 10, period: day}
           error_after: {count: 20, period: day}
       - name: HR_JOINS
         freshness:
-          warn_after: {count: 1, period: day}
+          warn_after: {count: 10, period: day}
           error_after: {count: 20, period: day}
       - name: HR_QUITS
         freshness:
-          warn_after: {count: 1, period: day}
+          warn_after: {count: 10, period: day}
           error_after: {count: 20, period: day}
       - name: RETURNS
         freshness:
-          warn_after: {count: 1, period: day}
+          warn_after: {count: 10, period: day}
           error_after: {count: 20, period: day}
 
   - name: Snowflake
@@ -28,17 +28,17 @@ sources:
     tables:
       - name: ITEM_VIEWS
         freshness:
-          warn_after: {count: 1, period: day}
+          warn_after: {count: 10, period: day}
           error_after: {count: 20, period: day}
       - name: ORDERS
         freshness:
-          warn_after: {count: 1, period: day}
+          warn_after: {count: 10, period: day}
           error_after: {count: 20, period: day}
       - name: PAGE_VIEWS
         freshness:
-          warn_after: {count: 1, period: day}
+          warn_after: {count: 10, period: day}
           error_after: {count: 20, period: day}
       - name: SESSIONS
         freshness:
-          warn_after: {count: 1, period: day}
+          warn_after: {count: 10, period: day}
           error_after: {count: 20, period: day}
