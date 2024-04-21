@@ -8,15 +8,19 @@ sources:
       - name: EXPENSES
         freshness:
           warn_after: {count: 1, period: day}
+        loaded_at_field: fivetran_synced
       - name: HR_JOINS
         freshness:
           warn_after: {count: 1, period: day}
+        loaded_at_field: fivetran_synced
       - name: HR_QUITS
         freshness:
           warn_after: {count: 1, period: day}
+        loaded_at_field: fivetran_synced
       - name: RETURNS
         freshness:
           warn_after: {count: 1, period: day}
+        loaded_at_field: fivetran_synced
 
   - name: Snowflake
     database: LOAD
@@ -25,9 +29,11 @@ sources:
       - name: ITEM_VIEWS
         freshness:
           warn_after: {count: 1, period: day}
+        loaded_at_field: fivetran_synced
       - name: ORDERS
         freshness:
           warn_after: {count: 1, period: day}
+        loaded_at_field: fivetran_synced
       - name: PAGE_VIEWS
         freshness:
           warn_after: {count: 1, period: day}
