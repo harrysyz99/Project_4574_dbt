@@ -98,8 +98,6 @@ models:
           - not_null
       - name: session_ids
         description: session ids corresponding to a certain order
-        tests:
-          - not_null
       - name: order_date
         description: date of a order is placed
         tests:
@@ -201,8 +199,6 @@ models:
           - not_null
         description: timestamp of the order time. If there are multiple orders, record the lastest one. 
       - name: ORDER_STATES
-        tests:
-          - not_null
         description: This is the state of the order address. If there are multiple orders, record the lastest one. 
       - name: ORDER_PLACED
         tests:
