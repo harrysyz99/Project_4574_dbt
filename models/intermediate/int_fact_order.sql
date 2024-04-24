@@ -16,6 +16,7 @@ SELECT
 FROM {{ ref("base_snowflake_ORDERS") }} AS o
 FULL JOIN {{ ref("base_goolge_drive_RETURNS") }} AS r ON r.ORDER_ID = o.ORDER_ID
 FULL JOIN {{ ref("base_snowflake_ITEM_VIEWS") }} AS i ON i.SESSION_ID = o.SESSION_ID
+WHERE o.ORDER_ID IS NOT NULL
 GROUP BY o.ORDER_ID
 HAVING MAX(DATE(o.ORDER_AT_TS)) IS NOT NULL 
 
